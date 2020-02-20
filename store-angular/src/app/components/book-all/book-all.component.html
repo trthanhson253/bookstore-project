@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <h1>ALL BOOKS</h1>
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <select
+        id="sortBy"
+        class="form-control"
+        [(ngModel)]="sortBy"
+        (ngModelChange)="changed($event)"
+      >
+        <option>---------------Sort By---------------</option>
+        <option value="pricelowtohigh">Price From Low To High</option>
+        <option value="pricehightolow">Price From High To Low</option>
+        <option value="newest">Newest</option>
+      </select>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+  </div>
+  <br />
+  <br />
+
+  <div class="row">
+    <div *ngIf="!dataFetched" style="margin-top: 50px;">
+      <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+          <mat-spinner></mat-spinner>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 mt-4" *ngFor="let book of books">
+      <div class="card" style="height: 550px;" *ngIf="dataFetched">
+        <a [routerLink]="['/books/list', book.id]"
+          ><img
+            class="card-img-top"
+            style="width: 265px;height: 260px;"
+            src="http://hq.recyclist.co/wp-content/uploads/2015/02/books-300x300.jpg"
+            (error)="img.src = '../../../../assets/img/default.png'"
+            #img
+        /></a>
+        <div class="card-block">
+          <h4 class="card-title">
+            <a [routerLink]="['/books/list', book.id]"> {{ book.title }}</a>
+          </h4>
+          <div class="meta">
+            by <strong>{{ book.author }}</strong>
+          </div>
+          <div class="card-text">
+            Publisher: <strong>{{ book.publisher }}</strong>
+          </div>
+          <div class="card-text">
+            ISBN: <strong>{{ book.isbn }}</strong>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="float-right"
+            ><h3>${{ book.listPrice }}</h3></span
+          >
+          <span><i class=""></i></span>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+</div>

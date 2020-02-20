@@ -1,0 +1,83 @@
+<div class="col-sm-9">
+  <table
+    width="100%"
+    border="0"
+    cellspacing="0"
+    cellpadding="0"
+    class="fillout-form"
+  >
+    <tbody>
+      <tr class="header-footer text-center" style="font-size: 1.5em;">
+        <td colspan="2">
+          <h2><strong>Photo</strong></h2>
+          <h5>Add a nice photo of yourself for your profile.</h5>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <form>
+              <div class="form-group row text-center">
+                <img
+                  style="width: 250px;height: 250px;"
+                  [src]="
+                    'http://localhost:8184/image/user/' +
+                    currentUser.id +
+                    '.png'
+                  "
+                  (error)="img.src = '../../../assets/img/default.png'"
+                  #img
+                  class="avatar img-circle img-thumbnail"
+                  alt="avatar"
+                />
+                <h6>Upload your own photo ...</h6>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label><strong>Upload Image</strong></label>
+                    <div class="input-group">
+                      <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                          Browse…
+                          <input
+                            type="file"
+                            id="bookImage"
+                            (change)="
+                              uploadImageUserService.fileChangeEvent($event)
+                            "
+                          />
+                        </span>
+                      </span>
+                      <input type="text" class="form-control" readonly />
+                    </div>
+                    <img id="img-upload" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row text-center">
+                <div class="offset-4 col-8">
+                  <button
+                    name="submit"
+                    type="submit"
+                    mat-raised-button
+                    color="primary"
+                    (click)="onSubmit()"
+                    (click)="
+                      openSnackBar('You uploaded your photo successfully', 'OK')
+                    "
+                  >
+                    Change Your Photo
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-md-2"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

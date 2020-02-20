@@ -1,0 +1,88 @@
+<div class="container">
+    
+<div id="invoice">
+
+    <div class="toolbar hidden-print">
+        <div class="text-left">
+            <h2>Your Shopping Cart</h2>
+        </div>
+        <div class="text-right">
+            
+            <button mat-stroked-button color="accent">Continue Shopping</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="warn" (click)="continueCheckout()">Check Out</button>
+        </div>
+        
+    </div>
+    <br>
+    <div *ngIf="cartItemUpdated" class="alert alert-success">
+        Cart Item Updated Successfully!
+    </div>
+    <div *ngIf="notEnoughStock" class="alert alert-warning">
+        Oops, some of the products don't have enough stock. Please update product quantity.
+    </div>
+    <div *ngIf="emptyCart" class="alert alert-warning">
+        Oops, your cart is empty. See if you can find what you link in the bookshelf and add them to cart.
+    </div>
+    <div class="invoice overflow-auto">
+        <div style="min-width: 600px">
+           
+            <main>
+               
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="text-left">TITLE</th>
+                            <th class="text-right">PRICE</th>
+                            <th class="text-right">QUANTITY</th>
+                            <th class="text-right">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        <tr *ngFor="let cartItem of cartItemList">
+                            <td class="no"><a (click)="onSelect(cartItem.book)">Image Here</a></td>
+                            <td class="text-left"><h3>{{cartItem.book.title}}</h3> <p *ngIf="cartItem.book.inStockNumber > 10" style="color:green;">In Stock</p>
+                                <p *ngIf="cartItem.book.inStockNumber < 10 && cartItem.book.inStockNumber > 0" style="color:darkred;">Only <span>{{cartItem.book.inStockNumber}}</span> In Stock</p>
+                                <p *ngIf="cartItem.book.inStockNumber == 0" style="color:darkred;">Product Unavailable</p>
+                                <a href="javascript:;" class="pointer" (click)="onRemoveCartItem(cartItem)">Remove <img src="../../../assets/img/delete.png"></a></td>
+                            <td class="unit"> <h5 style="color:#db3208; font-weight: bold;">$<span [ngClass]="{'text-strike': cartItem.book.inStockNumber == 0}">{{cartItem.book.ourPrice}}</span>
+                            </h5></td>
+                            <td class="qty"><input hidden="hidden" name="id" [(ngModel)]="cartItem.id" />
+                                <input type="number" min="1" id="cartItem.id" name="qty" [disabled]="cartItem.book.inStockNumber==0" class="form-control" [(ngModel)]="cartItem.qty" (ngModelChange)="cartItem.toUpdate=true" />
+                                <br><a class="pointer" href="javascript:;" *ngIf="cartItem.toUpdate" class="pointer mat-warn" (click)="onUpdateCartItem(cartItem)">Update <img src="../../../assets/img/reload.png"></a></td>
+                            <td class="total">${{cartItem.subtotal}}</td>
+                        </tr>
+                       
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">SUBTOTAL (<span><strong>{{cartItemNumber}}</strong></span> items):</td>
+                            <td>${{shoppingCart.grandTotal}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">TAX ESTIMATE (8 %)</td>
+                            <td>${{shoppingCart.grandTotal*0.08 | number : '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">GRAND TOTAL</td>
+                            <td>${{shoppingCart.grandTotal*1.08 | number : '1.2-2'}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="thanks">Thank you!</div>
+                <div class="notices">
+                    <div>NOTICE:</div>
+                    <div class="notice">A final total will be calculated when check-out</div>
+                </div>
+            </main>
+           
+        </div>
+        <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+        <div></div>
+    </div>
+</div>
+</div>

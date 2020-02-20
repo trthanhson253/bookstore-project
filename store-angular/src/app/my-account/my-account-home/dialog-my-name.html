@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Update My Name</h1>
+<hr />
+<div mat-dialog-content>
+  <input
+    type="text"
+    class="form-control"
+    id="name"
+    value="{{user.name}}"
+    [(ngModel)]="user.name"
+    
+  />
+  {{newName}}
+</div>
+<br />
+<br />
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-raised-button color="warn" (click)="updateName()">
+    Update
+  </button>
+</div>

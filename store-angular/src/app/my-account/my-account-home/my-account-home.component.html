@@ -1,0 +1,175 @@
+<div class="col-sm-9">
+  <table
+    width="100%"
+    border="0"
+    cellspacing="0"
+    cellpadding="0"
+    class="fillout-form"
+  >
+    <tbody>
+      <tr class="header-footer text-center" style="font-size: 1.5em;">
+        <td colspan="2">
+          <h2><strong>My Account</strong></h2>
+          <h5>Edit your account settings and change your password here.</h5>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="form-group row">
+              <label for="username" class="col-4 col-form-label"
+                >My Username* :
+              </label>
+              <div class="col-8">
+                <strong>{{ user.username }}</strong>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="name" class="col-4 col-form-label">My Name:</label>
+              <div class="col-8">
+                <strong>{{ user.name }}</strong>
+                <span
+                  (click)="openDialogUpdateName()"
+                  class="btn btn-secondary"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Update Your Name!"
+                  ><img src="../../../assets/img/pencil.png"
+                /></span>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="email" class="col-4 col-form-label">My Email*</label>
+              <div class="col-8">
+                <strong>{{ user.email }}</strong>
+                <span
+                  (click)="openDialogUpdateEmail()"
+                  class="btn btn-secondary"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Update Your Email!"
+                  ><img src="../../../assets/img/pencil.png"
+                /></span>
+              </div>
+            </div>
+
+            <div
+              class="alert alert-danger alert-dismissible"
+              *ngIf="passwordAndReTypePasswordNotMatch"
+            >
+              <a href="#" class="close" data-dismiss="alert" aria-label="close"
+                >&times;</a
+              >
+              <strong
+                >Your new password and Re-type new password does not
+                match.</strong
+              >
+            </div>
+            <div
+              class="alert alert-danger alert-dismissible"
+              *ngIf="incorrectCurrentPassword"
+            >
+              <a href="#" class="close" data-dismiss="alert" aria-label="close"
+                >&times;</a
+              >
+              <strong
+                >We cannot find your current password in our database.</strong
+              >
+            </div>
+            <div
+              class="alert alert-success alert-dismissible"
+              *ngIf="updateSuccess"
+            >
+              <a href="#" class="close" data-dismiss="alert" aria-label="close"
+                >&times;</a
+              >
+              <strong
+                >You updated your password successfully. You can use this new
+                password now.</strong
+              >
+            </div>
+            <form (ngSubmit)="onChangePassword()" #f="ngForm">
+              <div class="form-group row">
+                <label for="currentPassword" class="col-4 col-form-label"
+                  >Current Password:
+                </label>
+                <div class="col-8">
+                  <input
+                    id="currentPassword"
+                    name="currentPassword"
+                    placeholder="Enter Your Current Password Here"
+                    class="form-control here"
+                    type="password"
+                    [(ngModel)]="currentPassword"
+                    #currentPassword1="ngModel"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="newPassword" class="col-4 col-form-label"
+                  >New Password:
+                </label>
+                <div class="col-8">
+                  <input
+                    id="newPassword"
+                    name="newPassword"
+                    placeholder="Enter Your New Password Here"
+                    class="form-control here"
+                    type="password"
+                    [(ngModel)]="newPassword"
+                    #newPassword1="ngModel"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="retypePassword" class="col-4 col-form-label"
+                  >Re-type New Password:
+                </label>
+                <div class="col-8">
+                  <input
+                    id="retypePassword"
+                    name="retypePassword"
+                    placeholder="Re-type Your New Password Here"
+                    class="form-control here"
+                    type="password"
+                    [(ngModel)]="retypePassword"
+                    #retypePassword1="ngModel"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="retypePassword" class="col-8 col-form-label"
+                  >Note:
+                  <strong>Please type 3 fields to change your password</strong>
+                </label>
+              </div>
+
+              <div class="form-group row">
+                <div class="text-center">
+                  <button
+                    mat-raised-button
+                    color="warn"
+                    type="submit"
+                    [disabled]="!f.form.valid"
+                  >
+                    Change Your Password
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-md-2"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

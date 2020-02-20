@@ -1,0 +1,105 @@
+<div class="col-sm-9">
+  <table
+    width="100%"
+    border="0"
+    cellspacing="0"
+    cellpadding="0"
+    class="fillout-form"
+  >
+    <tbody>
+      <tr class="header-footer text-center" style="font-size: 1.5em;">
+        <td colspan="2">
+          <h2><strong>Payment Method</strong></h2>
+          <h5>Update your credit card information.</h5>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-lg-12">
+                <h1>
+                  My Card
+                  <div class="btn icon-btn pull-right">
+                    <button
+                      mat-raised-button
+                      color="warn"
+                      (click)="openDialogAddMyCard()"
+                    >
+                      +Add New Card
+                    </button>
+                  </div>
+                </h1>
+              </div>
+              <br /><br /><br />
+              <hr />
+              <ng-container *ngIf="userPayment; else noUserPayment">
+                <div
+                  class="col-xs-12 col-sm-6 col-md-6 col-lg-6"
+                  *ngFor="let s of userPayment"
+                >
+                  <div
+                    class="thumbnail"
+                    [ngStyle]="{
+                      'border-color': s.defaultPayment ? 'blue' : 'black'
+                    }"
+                  >
+                    <div class="caption">
+                      <div class="col-lg-12">
+                        <i class="glyphicon glyphicon-credit-card"></i>
+                        <a href="javascript:;"
+                          ><img
+                            class="pull-right"
+                            src="../../../assets/img/rubbish.png"
+                            (click)="openDialogDeleteMyCard(s.id)"/></a
+                        ><br />
+                      </div>
+                      <div class="col-lg-12 well well-add-card">
+                        <h4>
+                          <strong>xxxx - {{ s.cardNumber | slice: -4 }}</strong>
+                        </h4>
+                      </div>
+                      <div class="col-lg-12">
+                        <p>{{ s.cardName }}</p>
+                        <p>Exp: {{ s.expiryDate }}</p>
+                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-xs btn-update btn-add-card"
+                        (click)="openDialogUpdateMyCard(s)"
+                      >
+                        Update
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-xs btn-update btn-add-card"
+                        (click)="setDefaultPayment(s.id)"
+                        *ngIf="s.defaultPayment == 0"
+                      >
+                        Choose this Card as Your Main Card
+                      </button>
+                      &nbsp;&nbsp;&nbsp;<span *ngIf="s.defaultPayment == 1">
+                        <img src="../../../assets/img/success.png" />
+                      </span>
+                      <img
+                        class="pull-right"
+                        src="../../../assets/img/visa.png"
+                      />&nbsp;&nbsp;
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-template #noUserPayment>
+                <div class="text-center">
+                  <h1>There are currently no books in this category</h1>
+                </div>
+              </ng-template>
+            </div>
+            <!-- End row -->
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

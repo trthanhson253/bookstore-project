@@ -1,0 +1,397 @@
+<div class="bea-portal-theme-alibrisInvisible">
+
+    <div class="bea-portal-book-primary">
+
+        <div class="bea-portal-book-primary-content">
+
+            <div class="bea-portal-theme-alibrisMain">
+
+                <div class="bea-portal-book-invisible">
+
+                    <div class="bea-portal-book-content">
+
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+
+                        <div id="bea-portal-book-primary" class="bea-portal-book-page">
+                            <div id="skip-main">
+
+                                <table class="bea-portal-layout-grid" cellspacing="0">
+
+                                    <tbody>
+                                        <tr>
+
+                                            <td class="bea-portal-layout-placeholder-container-singleColRightBorder" width="100%">
+
+                                                <div class="bea-portal-layout-placeholder">
+
+                                                    <table class="bea-portal-layout-flow" cellspacing="0">
+                                                        <tbody>
+                                                            <tr>
+
+                                                                <td class="bea-portal-layout-placeholder-container" width="100%">
+
+                                                                    <div class="bea-portal-layout-placeholder">
+
+                                                                        <!-- w-begin -->
+
+                                                                        <!-- tb-begin -->
+
+                                                                        <!-- tb-end -->
+
+                                                                        <div id="login">
+
+                                                                            <div id="loginContainer">
+
+                                                                                <div class="page-intro">
+                                                                                    <h1>Account Sign-In</h1>
+                                                                                </div>
+                                                                                <p>
+
+                                                                                    <!-- start left div -->
+                                                                                </p>
+
+                                                                                <div class="left">
+                                                                                    <form (ngSubmit)="f.form.valid && onLogin()" #f="ngForm" novalidate *ngIf="!isForgotPassword">
+
+                                                                                        <div>
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fillout-form">
+                                                                                                <tbody>
+                                                                                                    <tr class="header-footer" style="font-size: 1.5em;">
+                                                                                                        <td colspan="2">
+                                                                                                            <h2>Registered users - sign in</h2></td>
+                                                                                                    </tr>
+                                                                                                    <div>
+
+                                                                                                    </div>
+                                                                                                    <tr>
+                                                                                                        <td align="right">
+                                                                                                            <label for="email">Username</label>
+                                                                                                        </td>
+
+                                                                                                        <td>
+                                                                                                            <input name="username" [(ngModel)]="user.username" #username="ngModel" required id="username" type="text" size="24" data-emoji_font="true" style="font-family: arial, helvetica, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, Symbola, EmojiSymbols !important;">
+
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td align="right">
+                                                                                                            <label for="password">password</label>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <input name="password" [(ngModel)]="user.password" #password="ngModel" required id="password" type="password" size="24">
+
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td></td>
+                                                                                                        <td><span class="label label-danger" *ngIf="loginError">Sorry! The e-mail address or password you entered was incorrect. Please try again.</span>
+
+                                                                                                        </td>
+
+                                                                                                    </tr>
+                                                                                                    <tr class="header-footer">
+                                                                                                        <td colspan="2" align="right">
+
+                                                                                                            <input type="submit" class="btn oneClick" value="Sign In">
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <div class="smallgreytype" style="text-align:center;">
+
+                                                                                                <button mat-raised-button color="primary" (click)="forgotPassword()">Forgot your password? Click here</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+
+                                                                                    <form (ngSubmit)="onForgotPassword()" #f="ngForm" novalidate *ngIf="isForgotPassword">
+                                                                                        <div class="show-success-panel" *ngIf="emailNotFound">
+                                                                                            <div class="alert alert-success alert-dismissible">
+                                                                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                                                                <strong>An email with temporary password has been sent to your email address!</strong>
+
+                                                                                            </div>
+                                                                                            <div class="smallgreytype" style="text-align:center;">
+
+                                                                                                <button mat-raised-button color="primary" (click)="forgotPassword()">Back to Sign In</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div *ngIf="!emailNotFound">
+                                                                                            <h5> >> Please enter the e-mail address you use for your account, then click the Enter button. 
+                                                                                                A new password will be sent to the e-mail address you submit.</h5>
+
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fillout-form">
+                                                                                                <tbody>
+                                                                                                    <tr class="header-footer" style="font-size: 1.5em;">
+                                                                                                        <td colspan="2">
+                                                                                                            <h2>Retrieve your password</h2></td>
+                                                                                                    </tr>
+
+                                                                                                    <tr>
+                                                                                                        <td align="right">
+                                                                                                            <label for="email">Your Email Address</label>
+                                                                                                        </td>
+
+                                                                                                        <td>
+                                                                                                            <input name="email" [(ngModel)]="getPasswordEmail" #email="ngModel" required id="email" type="email" size="24" data-emoji_font="true" style="font-family: arial, helvetica, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, Symbola, EmojiSymbols !important;">
+
+                                                                                                        </td>
+
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td></td>
+                                                                                                        <td><span class="label label-danger" *ngIf="emailFound">We cannot find your email in our database. Please try again! </span>
+
+                                                                                                        </td>
+
+                                                                                                    </tr>
+
+                                                                                                    <tr class="header-footer">
+                                                                                                        <td colspan="2" align="right">
+
+                                                                                                            <button type="submit" class="btn oneClick">Enter</button>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <div style="text-align:center;">
+                                                                                                <button mat-raised-button color="primary" (click)="forgotPassword()">Back to Sign In</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                    <br>
+                                                                                    <br>
+                                                                                    <br>
+
+                                                                                </div>
+                                                                                <!-- end left div -->
+                                                                                <!-- start right div -->
+
+                                                                                <div class="right">
+
+                                                                                    <form (ngSubmit)="f.form.valid && onRegister()" #f="ngForm">
+
+                                                                                        <div>
+                                                                                            <!-- start new customer form -->
+                                                                                            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="fillout-form" *ngIf="!isRegisteredSuccess">
+                                                                                                <tbody>
+                                                                                                    <tr class="header-footer" style="font-size: 1.5em;">
+                                                                                                        <td colspan="2">
+                                                                                                            <h2>Create a new account !</h2></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td colspan="2">
+                                                                                                            <div class="alert alert-warning">
+                                                                                                                <strong>Your must type all fields below to register</strong>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td width="42%" align="right">
+                                                                                                            <label for="field0">your name</label>
+                                                                                                        </td>
+                                                                                                        <td width="58%" align="left" valign="top">
+                                                                                                            <input name="name" [(ngModel)]="userRegister.name" #name="ngModel" required id="name" type="text">
+
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td align="right">
+                                                                                                            <label for="field1">your username</label>
+                                                                                                        </td>
+                                                                                                        <td align="left" valign="top">
+                                                                                                            <input name="username" [(ngModel)]="userRegister.username" #username="ngModel" required id="username" type="text">
+
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td></td>
+                                                                                                        <td><span class="label label-danger" *ngIf="usernameExists">Your username is already used</span></td>
+
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td align="right">
+                                                                                                            <label for="field1">your e-mail</label>
+                                                                                                        </td>
+                                                                                                        <td align="left" valign="top">
+                                                                                                            <input name="email1" [(ngModel)]="userRegister.email" #email1="ngModel" required id="email1" type="email">
+
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td></td>
+                                                                                                        <td><span class="label label-danger" *ngIf="emailExists">Your email is already used</span></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td align="right">
+                                                                                                            <label for="field2">confirm your e-mail</label>
+                                                                                                        </td>
+                                                                                                        <td align="left" valign="top">
+                                                                                                            <input name="confirmEmail" [(ngModel)]="userRegister.confirmEmail" #confirmEmail="ngModel" required id="confirmEmail" type="email">
+
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td></td>
+                                                                                                        <td><span class="label label-danger" *ngIf="emailNotMatch">Your email does not match</span></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td align="right">&nbsp;</td>
+                                                                                                        <td align="left" valign="top"><span class="smallgreytype"><b>Privacy Policy:</b> We do not share your email address.</span></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td align="right">
+                                                                                                            <label for="field3">select a password</label>
+                                                                                                        </td>
+                                                                                                        <td align="left" valign="top">
+                                                                                                            <input name="password" [(ngModel)]="userRegister.password" #password="ngModel" required id="password" type="password">
+
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td></td>
+                                                                                                        <td><span class="label label-danger" *ngIf="passwordLength">Your password must be at least 6 characters</span></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td align="right">&nbsp;</td>
+                                                                                                        <td align="left" valign="top"><span class="smallgreytype">Passwords must contain between 6 and 15 characters,<br> and cannot contain spaces or non-English characters.</span></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td align="right">
+                                                                                                            <label for="field4">re-enter password</label>
+                                                                                                        </td>
+                                                                                                        <td align="left" valign="top"><span class="header">
+                                                                                                            <input name="confirmPassword"
+                                                                                                            [(ngModel)]="userRegister.confirmPassword" #confirmPassword="ngModel" required
+                                                                                                            id="confirmPassword"
+                                                                                                            type="password">
+
+                                                                                                            </span></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td></td>
+                                                                                                        <td><span class="label label-danger" *ngIf="passwordNotMatch">Your password does not match</span></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td align="right">
+                                                                                                            <label for="field4">Upload Image</label>
+                                                                                                        </td>
+                                                                                                        <td align="left" valign="top"><span class="header">
+                                                                                                            <input type="file" id="userImage" name="userImage" (change)="uploadImageUserService.fileChangeEvent($event)">
+
+                                                                                                            </span></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td colspan="2" align="left" valign="top">
+                                                                                                            <table border="0" class="table-btm">
+                                                                                                                <tbody>
+                                                                                                                    <tr>
+                                                                                                                        <td width="15" align="right" valign="top" style="border-width: 0;">
+
+                                                                                                                            <input type="hidden" name="accountwlw-checkbox_key:{actionForm.receiveNewsletters}OldValue" value="false">
+                                                                                                                            <input type="checkbox" name="accountwlw-checkbox_key:{actionForm.receiveNewsletters}" id="field5" checked="">
+
+                                                                                                                        </td>
+                                                                                                                        <td align="left" valign="top" style="border-width: 0;" class="td-wide">
+                                                                                                                            <label for="field5">
+
+                                                                                                                                <div class="nlSign">I agree to all of terms and services</div>
+                                                                                                                            </label>
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                                                                        </td>
+                                                                                                    </tr>
+
+                                                                                                    <tr class="header-footer">
+                                                                                                        <td colspan="2" align="right" valign="middle">
+                                                                                                            <input type="submit" name="continue2" class="btn oneClick" aria-label="sign in" value="Register" [disabled]="!f.form.valid">
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <!-- end new customer form -->
+
+                                                                                        </div>
+                                                                                    </form>
+
+                                                                                    <!-- start new customer form -->
+                                                                                    <table *ngIf="isRegisteredSuccess">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td colspan="2">
+                                                                                                    <div class="alert alert-success alert-dismissible">
+                                                                                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                                                                        <h3>Thank you, <strong>{{newUser.name}}</strong> ! You have been registered your account successfully. A confirmation email has been sent to your email address <strong>{{newUser.email}}</strong>
+                                                                                                            .Please Sign In by using username <strong>{{newUser.username}}</strong>.
+                                                                                                </h3>
+                                                                                                    </div>
+
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+
+                                                                                </div>
+                                                                                <!-- end right div -->
+
+                                                                                <div class="clear-space"></div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- w-end -->
+
+                                                                    </div>
+                                                                </td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+                        <div class="bea-portal-theme-alibrisInvisible">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="bea-portal-theme-alibrisMain">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

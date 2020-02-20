@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Add New Address</h1>
+<hr />
+<div mat-dialog-content>
+    <input type="text" class="form-control" id="userShippingName" [(ngModel)]="userShipping.userShippingName" placeholder="Shipping Name"/><br>
+  <input type="text" class="form-control" id="userShippingStreet" [(ngModel)]="userShipping.userShippingStreet" placeholder="Address" /><br>
+  <div class="row">
+    <div class="col-md-6">
+        <input type="text" class="form-control" id="userShippingCity" [(ngModel)]="userShipping.userShippingCity" placeholder="City"/><br>
+        </div>
+        <div class="col-md-6">
+        
+            <select id="userShippingState" class="form-control" required="required" placeholder="State" [(ngModel)]="userShipping.userShippingState">
+    
+                <option value="" disabled>--------State--------</option>
+                <option *ngFor="let state of stateList">{{state}}</option>
+            </select>
+            
+            <br>
+            </div>
+       
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+        <select id="userShippingCountry" class="form-control" required="required" [(ngModel)]="userShipping.userShippingCountry">
+    
+            <option value="" disabled>--------Country--------</option>
+            <option *ngFor="let state of stateList">{{state}}</option>
+        </select>
+    </div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="userShippingZipcode" [(ngModel)]="userShipping.userShippingZipcode" placeholder="Zip Code"/><br>
+        </div>
+  </div>
+  
+  
+  
+  
+</div>
+<br />
+<br />
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  
+  <button mat-raised-button color="warn" (click)="onAddNewAddress()">
+    Add New Address
+  </button>
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <h1>YOUR FAVORITE BOOK</h1>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    
+   
+    <div class="row">
+      <div class="col-sm-6 col-md-4 col-lg-3 mt-4" *ngFor="let wishListCartItem of wishListCartItemList">
+        <div class="card">
+          <a [routerLink]="['/books/list', wishListCartItem.book.id]"
+            ><img
+              class="card-img-top"
+              style="width: 265px;height: 260px;"
+              [src]="'http://localhost:8184/image/book/' + wishListCartItem.book.id + '.png'"
+              (error)="img.src = '../../../../assets/img/default.png'"
+              #img
+          /></a>
+          <div class="card-block">
+            <h4 class="card-title">
+              <a [routerLink]="['/books/list', wishListCartItem.book.id]"> {{ wishListCartItem.book.title }}</a>
+            </h4>
+            <div class="meta">
+              by <strong>{{ wishListCartItem.book.author }}</strong>
+            </div>
+            <div class="card-text">
+              Publisher: <strong>{{ wishListCartItem.book.publisher }}</strong>
+            </div>
+            <div class="card-text">
+              ISBN: <strong>{{ wishListCartItem.book.isbn }}</strong>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="float-right"
+              ><h3>${{ wishListCartItem.book.listPrice }}</h3></span
+            >
+            <span><i class=""></i></span>
+            <br>
+            <a href="javascript:;" (click)="removeWishListCartItem(wishListCartItem.id)">Remove this book</a>
+            <br>
+            <br>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+  

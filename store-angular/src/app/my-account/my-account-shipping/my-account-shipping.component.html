@@ -1,0 +1,123 @@
+<div class="col-sm-9">
+  <table
+    width="100%"
+    border="0"
+    cellspacing="0"
+    cellpadding="0"
+    class="fillout-form"
+  >
+    <tbody>
+      <tr class="header-footer text-center" style="font-size: 1.5em;">
+        <td colspan="2">
+          <h2><strong>Shipping Address</strong></h2>
+          <h5>Update your shipping address information.</h5>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-lg-12">
+                <h1>
+                  My Shipping Address
+                  <div class="btn icon-btn pull-right">
+                    <button
+                      mat-raised-button
+                      color="warn"
+                      (click)="openDialogAddMyAddress()"
+                    >
+                      +Add New Address
+                    </button>
+                  </div>
+                </h1>
+              </div>
+              <br /><br />
+              <hr />
+              <div id="fancy-list-group">
+                <div class="row">
+                  <div class="list-group">
+                    <div class="col-lg-12" *ngFor="let s of userShipping">
+                      <li
+                        class="list-group-item"
+                        [ngClass]="{
+                          'list-group-item-success': s.userShippingDefault == 1,
+                          'list-group-item-danger': s.userShippingDefault == 0
+                        }"
+                      >
+                        <div class="list-group-item-addon">
+                          <img src="../../../assets/img/house.png" />
+                        </div>
+                        <div class="list-group-item-content">
+                          <h4 class="list-group-item-heading">
+                            <strong>{{ s.userShippingName }}</strong>
+                          </h4>
+                          <p class="list-group-item-text">
+                            {{ s.userShippingStreet }} ,
+                            {{ s.userShippingCity }} ,
+                            {{ s.userShippingState }}
+                            {{ s.userShippingZipcode }} ,{{
+                              s.userShippingCountry
+                            }}
+                          </p>
+                        </div>
+                        <div class="list-group-item-controls">
+                          <span class="label">Controls</span>
+                          <div class="btn-group">
+                            <a
+                              href="javascript:;"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Update this address"
+                              ><img
+                                src="../../../assets/img/pencil.png"
+                                (click)="openDialogUpdateMyAddress(s)"
+                            /></a>
+                            <a
+                              href="javascript:;"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Delete this address"
+                              ><img
+                                src="../../../assets/img/bin.png"
+                                (click)="openDialogDeleteMyAddress(s.id)"
+                            /></a>
+                          </div>
+                        </div>
+                      </li>
+                      <!-- <button
+                        mat-raised-button
+                        class="mat-primary"
+                        type="submit"
+                        (click)="setDefaultShipping(s.id)"
+                        *ngIf="s.userShippingDefault == 0"
+                      > -->
+                      <a
+                        href="javascript:;"
+                        (click)="setDefaultShipping(s.id)"
+                        *ngIf="s.userShippingDefault == 0"
+                        style="text-decoration: underline;"
+                      >
+                        Choose this Address</a
+                      >
+                      <!-- </button> -->
+
+                      <h5 *ngIf="s.userShippingDefault == 1">
+                        <img src="../../../assets/img/success.png" /><strong
+                          >This is your main shipping address</strong
+                        >
+                      </h5>
+
+                      <hr />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End row -->
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Add New Card</h1>
+<hr />
+<div mat-dialog-content>
+   <h5>Card Number: </h5><input type="text" class="form-control" id="cardNumber" [(ngModel)]="userPayment.cardNumber" placeholder="Card Number"/><br>
+   <h5>Name on Card: </h5><input type="text" class="form-control" id="cardName" [(ngModel)]="userPayment.cardName" placeholder="Name on Card" /><br>
+  <div class="row">
+    <div class="col-md-6">
+      <h5>Expiration Date: </h5><input type="text" class="form-control" id="expiryDate" [(ngModel)]="userPayment.expiryDate" placeholder="MM/DD"/><br>
+        </div>
+        <h5>Security Code: </h5><div class="col-md-6">
+            <input type="text" class="form-control" id="securityCode" [(ngModel)]="userPayment.securityCode" placeholder="Security Code"/><br>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h5>State: </h5>
+        <select id="state" class="form-control" required="required" placeholder="State" [(ngModel)]="userPayment.state">
+
+            <option value="" disabled>--------State--------</option>
+            <option *ngFor="let state of stateList">{{state}}</option>
+        </select>
+        
+        <br>
+        </div>
+        <div class="col-md-6">
+          <h5>Zip Code: </h5>
+            <input type="text" class="form-control" id="zipCode" [(ngModel)]="userPayment.zipCode" placeholder="Zip Code"/><br>
+        </div>
+  </div>
+  
+  
+  
+  
+</div>
+<br />
+<br />
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  
+  <button mat-raised-button color="warn" (click)="onAddNewCard()">
+    Update My Card
+  </button>
+</div>

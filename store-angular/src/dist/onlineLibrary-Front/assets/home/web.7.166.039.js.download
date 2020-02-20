@@ -1,0 +1,19 @@
+function popup(winname,url,height,width,scroll){var features="dependent=yes,height="+height+",width="+width+",location=no,menubar=no,resizable=yes,screenX=200,left=200,screenY=200,top=200,status=no,toolbar=no,scrollbars="+scroll;var remote=open(url,winname,features);if(remote.opener==null)
+remote.opener=window;return remote;}
+var changeCurrencyUrl;function changeCurrency(actionUrl){changeCurrencyUrl=actionUrl;var features="dependent=yes,height=300,width=475,location=no,menubar=no,resizable=yes,screenX=200,left=200,screenY=200,top=200,status=no,toolbar=no,scrollbars=no";var remote=open("/popups/change-currency","changeCurrency",features);if(remote.opener==null){remote.opener=window;}}
+function setNewCurrency(currencyCode){document.location.href=changeCurrencyUrl+"&currencyCode="+currencyCode;}
+function updateCartQuantityText(newValue){$('#cart-items-text').empty().append('<div>'+newValue+'</div>');}
+function updateCartQuantityTextNew(newValue){$('#cart-items-text').empty().append(newValue);}
+function gtm_vp(url,title){dataLayer.push({'event':'vp_ev','vp_page_url':url,'vp_page_title':title});return 1;}
+function gtm_event(event,category,action,label,callback,non_interaction){if(non_interaction===undefined)non_interaction=0;event_hash={'event':event,'event_category':category,'event_action':action,'event_label':label,'event_value':0,'non_interaction':non_interaction};if(callback=='ecommerce'&&label=='sign in'){callback='both'}
+if(callback=='user'){event_hash['eventCallback']=function(){dataLayer.push({'user':undefined});}}else if(callback=='ecommerce'){event_hash['eventCallback']=function(){dataLayer.push({'ecommerce':undefined});}}else if(callback=='both'){event_hash['eventCallback']=function(){dataLayer.push({'user':undefined,'ecommerce':undefined});}}
+dataLayer.push(event_hash);return 1;}
+function gtm_checkout(action,label,step){dataLayer.push({'ecommerce':{'checkout':{'actionField':{'step':step},'products':gtm_products}}});return gtm_event('eec_checkout','ecommerce',action,label,'ecommerce',1);}
+function gtm_checkoutOption(action,label,step,option){dataLayer.push({'ecommerce':{'checkout_option':{'actionField':{'step':step,'option':option}}}});return gtm_event('eec_checkoutOption','ecommerce',action,label,'ecommerce',0);}
+function gtm_purchase(action,label,id,revenue,tax,shipping,coupon){dataLayer.push({'ecommerce':{'purchase':{'actionField':{'id':id,'revenue':revenue,'tax':tax,'shipping':shipping,'coupon':coupon},'products':gtm_products}}});return gtm_event('eec_purchase','ecommerce',action,label,'ecommerce',0);}
+function gtm_ecommerce(action,label){return gtm_event('gen_ev_ecommerce','ecommerce',action,label,'',0);}
+function gtm_advanced_search(action,label){return gtm_event('gen_ev_advanced_search','advanced search',action,label,'',0);}
+function gtm_create_account(action,label){return gtm_event('gen_ev_create_account','create account',action,label,'user',0);}
+function gtm_email_sign_up(action,label){return gtm_event('gen_ev_email_sign_up','email sign up',action,label,'',0);}
+function gtm_sign_in(action,label){return gtm_event('gen_ev_sign_in','sign in',action,label,'user',0);}
+function gtm_sign_in_recovery(action,label){return gtm_event('gen_ev_sign_in_recovery','sign in recovery',action,label,'',0);}

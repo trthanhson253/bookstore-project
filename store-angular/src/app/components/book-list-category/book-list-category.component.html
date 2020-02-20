@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>{{ cate.name }}</h1>
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3 mt-4" *ngFor="let book of books">
+      <div class="card" style="height: 550px;">
+        <a [routerLink]="['/books/list', book.id]"
+          ><img
+            class="card-img-top"
+            style="width: 265px;height: 260px;"
+            src="http://hq.recyclist.co/wp-content/uploads/2015/02/books-300x300.jpg"
+            (error)="img.src = '../../../../assets/img/default.png'"
+            #img
+        /></a>
+        <div class="card-block">
+          <h4 class="card-title">
+            <a [routerLink]="['/books/list', book.id]"> {{ book.title }}</a>
+          </h4>
+          <div class="meta">
+            by <strong>{{ book.author }}</strong>
+          </div>
+          <div class="card-text">
+            Publisher: <strong>{{ book.publisher }}</strong>
+          </div>
+          <div class="card-text">
+            ISBN: <strong>{{ book.isbn }}</strong>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="float-right"
+            ><h3>${{ book.listPrice }}</h3></span
+          >
+          <span><i class=""></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

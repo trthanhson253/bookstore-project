@@ -1,0 +1,158 @@
+<h1 mat-dialog-title>Add New Book</h1>
+<hr />
+<div mat-dialog-content>
+  <h5>Title:(Require)</h5>
+  <input
+    id="title"
+    type="text"
+    required
+    [(ngModel)]="newBook.title"
+    name="title"
+  />
+  <br />
+  <h5>Author:</h5>
+  <input
+    id="author"
+    type="text"
+    required
+    [(ngModel)]="newBook.author"
+    name="author"
+  />
+  <br />
+
+  <h5>Publisher:</h5>
+  <input
+    id="publisher"
+    type="text"
+    required
+    [(ngModel)]="newBook.publisher"
+    name="publisher"
+  />
+  <br />
+
+  <h5>Publication Date:</h5>
+  <input
+    id="publicationDate"
+    type="text"
+    required
+    [(ngModel)]="newBook.publicationDate"
+    name="publicationDate"
+  />
+  <br />
+
+  <h5>ISBN:(Require)</h5>
+  <input
+    id="isbn"
+    type="number"
+    required
+    [(ngModel)]="newBook.isbn"
+    name="isbn"
+  />
+  <br />
+
+  <h5>Language:</h5>
+  <input
+    id="language"
+    type="text"
+    required
+    [(ngModel)]="newBook.language"
+    name="language"
+  />
+  <br />
+
+  <h5>Number Of Pages:</h5>
+  <input
+    id="numberOfPages"
+    type="number"
+    required
+    [(ngModel)]="newBook.numberOfPages"
+    name="numberOfPages"
+  />
+  <br />
+
+  <h5>Format:</h5>
+  <input
+    id="format"
+    type="text"
+    required
+    [(ngModel)]="newBook.format"
+    name="format"
+  />
+  <br />
+
+  <h5>Shipping Weight:</h5>
+  <input
+    id="shippingWeight"
+    type="number"
+    required
+    [(ngModel)]="newBook.shippingWeight"
+    name="shippingWeight"
+  />
+  <br />
+
+  <h5>List Price:</h5>
+  <input
+    id="listPrice"
+    type="number"
+    required
+    [(ngModel)]="newBook.listPrice"
+    name="listPrice"
+  />
+  <br />
+
+  <h5>Our Price:</h5>
+  <input
+    id="ourPrice"
+    type="number"
+    required
+    [(ngModel)]="newBook.ourPrice"
+    name="ourPrice"
+  />
+  <br />
+
+  <h5>In Stock Number:</h5>
+  <input
+    id="inStockNumber"
+    type="number"
+    required
+    [(ngModel)]="newBook.inStockNumber"
+    name="inStockNumber"
+  />
+  <br />
+
+  <h5>Description:</h5>
+  <input
+    id="description"
+    type="textarea"
+    required
+    [(ngModel)]="newBook.description"
+    name="description"
+  />
+  <br />
+
+  <h5>Choose A Category:(Require)</h5>
+  <select select id="category" name="category" [(ngModel)]="cateId">
+    <option *ngFor="let cate of cates" value="{{ cate.id }}"
+      >{{ cate.name }}</option
+    >
+  </select>
+  <br />
+
+  <h5>Upload Image:</h5>
+  <input
+    type="file"
+    id="bookImage"
+    name="bookImage"
+    (change)="fileChange($event)"
+  />
+  <br />
+</div>
+<br />
+<br />
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+
+  <button mat-raised-button color="warn" (click)="onAddNewBook()">
+    Add New
+  </button>
+</div>

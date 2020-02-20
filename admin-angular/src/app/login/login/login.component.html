@@ -1,0 +1,36 @@
+<h1 style="text-align: left;font-size: xx-large;">
+  <strong>BOOK PORTAL</strong>
+</h1>
+
+<div class="loginbox">
+  <img src="../../../assets/image/avatar.png" class="avatar" />
+  <h1><strong>ADMIN LOGIN</strong></h1>
+  <div class="alert alert-warning" *ngIf="errorMessage">
+    <strong>{{ errorMessage }}</strong>
+  </div>
+  <form (ngSubmit)="f.form.valid && onLogin()" #f="ngForm" novalidate>
+    <p>Username</p>
+    <input
+      type="text"
+      name="username"
+      [(ngModel)]="user.username"
+      #username="ngModel"
+      required
+      id="username"
+      placeholder="Enter Username"
+    />
+    <p>Password</p>
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="user.password"
+      #password="ngModel"
+      required
+      id="password"
+      placeholder="Enter Password"
+    />
+    <input type="submit" name="" value="Login" />
+    <span>Username: admin</span><br>
+    <span>Password: 123456</span>
+  </form>
+</div>

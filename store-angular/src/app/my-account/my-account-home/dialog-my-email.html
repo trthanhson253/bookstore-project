@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Update My Email</h1>
+<hr />
+<div mat-dialog-content>
+  <input type="text" class="form-control" id="name" value="{{user.email}}" [(ngModel)]="user.email"/>
+  <h5 *ngIf="emailExist" style="color:red">>> This email already existed in our database. Please try another one! </h5>
+</div>
+<br />
+<br />
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  
+  <button mat-raised-button color="warn" (click)="updateEmail()">
+    Update
+  </button>
+</div>

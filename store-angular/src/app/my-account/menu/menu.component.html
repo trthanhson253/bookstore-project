@@ -1,0 +1,58 @@
+<div class="col-sm-3">
+  <!--left col-->
+
+  <div class="text-center">
+    <img
+      [src]="'http://localhost:8184/image/user/' + currentUser.id + '.png'"
+      (error)="img.src = '../../../assets/img/default.png'"
+      #img
+      class="avatar img-circle img-thumbnail"
+      alt="avatar"
+      style="height: 120px;width:120px"
+    />
+  </div>
+
+  <br />
+  <table width="100%" cellspacing="0" cellpadding="0" class="fillout-form">
+    <tbody>
+      <tr class="header-footer text-center" style="font-size: 1.5em;">
+        <td colspan="2">
+          <h2>{{ user.name }}</h2>
+        </td>
+      </tr>
+
+      <tr>
+        <div
+          class="list-group"
+          style="font-family: Arial, Helvetica, sans-serif;"
+        >
+          <a
+            [routerLink]="['/my-account/home']"
+            class="list-group-item list-group-item-action"
+            >Account</a
+          >
+          <a
+            [routerLink]="['/my-account/photo']"
+            class="list-group-item list-group-item-action"
+            >Public Profile</a
+          >
+          <a
+            [routerLink]="['/my-account/payment']"
+            class="list-group-item list-group-item-action"
+            >Payment Method</a
+          >
+          <a
+            [routerLink]="['/my-account/shipping']"
+            class="list-group-item list-group-item-action"
+            >Shipping</a
+          >
+          <a
+            [routerLink]="['/my-account/order']"
+            class="list-group-item list-group-item-action"
+            >Order</a
+          >
+        </div>
+      </tr>
+    </tbody>
+  </table>
+</div>

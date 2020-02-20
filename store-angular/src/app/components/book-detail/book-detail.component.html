@@ -1,0 +1,357 @@
+
+<div class="container">
+  <div class="col-sm-8">
+    <a [routerLink]="['/home']">Back to Category</a>
+    <br><br>
+    <div data-spy="scroll" class="tabbable-panel">
+      <div class="tabbable-line">
+        <ul class="nav nav-tabs ">
+          <li class="active">
+            <a href="#tab_default_1" data-toggle="tab"> About this book </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab_default_1">
+            <img
+              class="card-img-top"
+              style="width: 265px;height: 260px;"
+              src="http://hq.recyclist.co/wp-content/uploads/2015/02/books-300x300.jpg"
+              (error)="img.src = '../../../../assets/img/default.png'"
+              #img
+            />
+            <h2>
+              {{ book.title }}
+             
+            </h2>
+            <br />
+            <hr />
+            <br />
+            <div class="panel-group">
+              <div class="panel panel-primary">
+                <div class="panel-heading">Description</div>
+                <div class="panel-body">{{ book.description }}</div>
+              </div>
+            </div>
+            <hr />
+            <div class="container">
+              <div class="col-sm-8">
+                <div class="panel panel-white post panel-shadow">
+                  <div class="post-heading" style="background-color:gainsboro">
+                    <div class="pull-left image">
+                      <img
+                        src="../../../assets/img/book.png"
+                        class="avatar"
+                        alt="user profile image"
+                      />
+                    </div>
+                    <div class="pull-left meta">
+                      <div class="title h5">
+                        <h3><strong>Customer Review</strong> </h3>
+                      </div>
+                      <h6 class="text-muted time">Write your review</h6>
+                    </div>
+                  </div>
+
+                  <div class="post-footer">
+                    <form (ngSubmit)="f.form.valid && onComment()" #f="ngForm" *ngIf="isLoggedIn">
+                      <div class="input-group">
+                        <input
+                          class="form-control"
+                          placeholder="Add a comment"
+                          type="text"
+                          [(ngModel)]="commentContent"
+                          #comment="ngModel"
+                          required
+                          id="comment"
+                          name="comment"
+                          (keydown.enter)="openSnackBarForComment('You post your comment successfully', 'OK')"
+                        />
+                        <span class="input-group-addon">
+                          <a href="javascript:;"><i class="fa fa-edit"></i></a>
+                        </span>
+                      </div>
+                    </form>
+                    <div *ngIf="!isLoggedIn">You must sign in to write review and like comment</div>
+                    <ul class="comments-list">
+                      <li class="comment" *ngFor="let comment of commentList">
+                        <a class="pull-left" href="#">
+                         
+                          <img
+                          
+                          [src]="
+                            'http://localhost:8184/image/user/' +
+                            comment.user.id +
+                            '.png'
+                          "
+                          (error)="img.src = '../../../assets/img/default.png'"
+                          #img
+                          class="avatar img-circle"
+                          alt="avatar"
+                        />
+                        </a>
+                        <div class="comment-body">
+                          <div class="comment-heading">
+                            <h4 class="user">{{comment.user.name}}</h4>
+                            <h5 class="time">- Time </h5>
+                          </div>
+                          <p>{{comment.content}}</p>
+                          
+                      
+
+                          <a href="javascript:;" class="info" (mouseover)="getLikesListBasedOnComment(comment.id)"><img src="../../../assets/img/like.png"><strong>&nbsp;{{comment.likesList.length}}</strong>
+                            <span><div>People who liked this post: <p *ngFor="let likesList of likesListBasedOnComment">- {{likesList.name}}</p></div></span></a>
+                         
+                             
+                            <p><a href="javascript:/" (click)="onHitLike(comment.id);">   
+                              
+                                                 
+                              <span >Like</span></a> 
+                              
+                         - <img src="../../../assets/img/conversation.png">&nbsp;<a href="javascript:;" (click)="clickReply()">
+                              <span *ngIf="!clickedReply">Reply</span><span *ngIf="clickedReply">Close</span></a></p>
+                          
+                      
+                        </div>
+                        
+                        <ul class="comments-list" *ngIf="clickedReply">
+                          <form (ngSubmit)="g.form.valid && onReplyComment(comment.id)" #g="ngForm" *ngIf="isLoggedIn">
+                            <div class="input-group">
+                              <input
+                                class="form-control"
+                                placeholder="Add a comment"
+                                type="text"
+                                [(ngModel)]="replyCommentContent"
+                                #replyComment="ngModel"
+                                required
+                                id="replyComment"
+                                name="replyComment"
+                                (keydown.enter)="openSnackBarForComment('You post your comment successfully', 'OK')"
+                              />
+                              <!-- <input type="hidden" id="commentId" name="commentId" [(ngModel)]="comment"> -->
+                              <span class="input-group-addon">
+                                <a href="javascript:;"><i class="fa fa-edit"></i></a>
+                              </span>
+                            </div>
+                          </form>
+                          <li class="comment" *ngFor="let replyComment of comment.replyCommentList" style="background-color:azure">
+                              <a class="pull-left" href="#">
+                                <img
+                          
+                                [src]="
+                                  'http://localhost:8184/image/user/' +
+                                  replyComment.user.id +
+                                  '.png'
+                                "
+                                (error)="img.src = '../../../assets/img/default.png'"
+                                #img
+                                class="avatar img-circle"
+                                alt="avatar"
+                              />
+                              </a>
+                              <div class="comment-body" >
+                                  <div class="comment-heading">
+                                      <h4 class="user">{{replyComment.user.name}}</h4>
+                                      <h5 class="time">Time</h5>
+                                  </div>
+                                  <p>{{replyComment.content}}</p>
+                              </div>
+                          </li> 
+                         
+                      </ul>
+
+
+                        <hr>
+                        
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="menu_title">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="text-left">
+              List Price:
+              <strong style="text-decoration:line-through;font-size: medium;"
+                >${{ book.listPrice }}</strong
+              >
+            </div>
+            <div class="text-left">
+              Our Price:
+              <strong style="font-size: x-large;">${{ book.ourPrice }}</strong>
+            </div>
+            You saved: ${{ book.listPrice - book.ourPrice }}
+          </div>
+
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h4 *ngIf="book.inStockNumber > 10" style="color:green;">
+              In Stock
+            </h4>
+            <h4
+              *ngIf="book.inStockNumber < 10 && book.inStockNumber > 0"
+              style="color:green;"
+            >
+              Only <span>{{ book.inStockNumber }}</span> In Stock
+            </h4>
+            <h4 *ngIf="book.inStockNumber == 0" style="color:darkred;">
+              Unavailable
+            </h4>
+            <span>Qty: </span>
+            <select
+              [(ngModel)]="qty"
+              class="browser-default"
+              style="display:inline;width:50px;"
+            >
+              <option *ngFor="let x of numberList" [ngValue]="x">{{
+                x
+              }}</option>
+            </select>
+          </div>
+          
+        </div>
+        <br />
+        <br />
+        
+        <h4>
+          <span *ngIf="qty > book.inStockNumber" style="color:red"
+            >Oops, only <span>{{ book.inStockNumber }} </span> In Stock.</span
+          >
+        </h4>
+       
+        <span *ngIf="isLoggedIn">
+          <button mat-mini-fab aria-label="Example icon-button with a heart icon" (click)="onAddToWishListCart()"
+          [disabled]="isAddedToCartItemList" 
+          >
+            <mat-icon>favorite</mat-icon>
+          </button><span *ngIf="!isAddedToCartItemList">&nbsp; Add To My Favorite List</span>
+          <span *ngIf="isAddedToCartItemList">&nbsp; You added this book to Favorite List</span>
+        </span>
+      
+       
+        <br>
+        <br>
+        <button
+          mat-raised-button
+          color="warn"
+          class="btn btn-danger btn-block"
+          *ngIf="isLoggedIn"
+          [disabled]="book.inStockNumber == 0 || qty > book.inStockNumber"
+          (click)="onAddToCart()"
+          (click)="
+            openSnackBar('You Added This Book To Cart Successfully', 'OK')
+          "
+        >
+          ADD TO CART
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          class="btn btn-danger btn-block"
+          *ngIf="!isLoggedIn"
+          (click)="needLogIn()"
+        >
+          You need to login to add items
+        </button>
+       
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="email">Author:</label>{{ book.author }}
+            </div>
+            <div class="form-group">
+              <label for="email">Publisher: </label>
+              {{ book.publisher }}
+            </div>
+            <div class="form-group">
+              <label for="email">ISBN: </label>
+              {{ book.isbn }}
+            </div>
+
+            <div class="form-group">
+              <label for="email">Language: </label>
+              {{ book.language }}
+            </div>
+            <div class="form-group">
+              <label for="email">Number Of Pages: </label>
+              {{ book.numberOfPages }}
+            </div>
+            <div class="form-group">
+              <label for="email">Format: </label>
+              {{ book.format }}
+            </div>
+            <div class="form-group">
+              <label for="email">Shipping Weight: </label>
+              {{ book.shippingWeight }}
+            </div>
+            <div class="form-group">
+              <label for="email">Publication Date: </label>
+              {{ book.publicationDate }}
+            </div>
+            <div class="form-group">
+              <label for="email">Number in Stock: </label>
+              {{ book.inStockNumber }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+<div class="container">
+  <h1>Related Books in this category</h1>
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3 mt-4" *ngFor="let book of bookList">
+      <div class="card">
+        <a href="/books/list/{{book.id}}"
+          ><img
+            class="card-img-top"
+            style="width: 265px;height: 260px;"
+            src="http://hq.recyclist.co/wp-content/uploads/2015/02/books-300x300.jpg"
+            (error)="img.src = '../../../../assets/img/default.png'"
+            #img
+        /></a>
+        <div class="card-block">
+          <h4 class="card-title">
+            <a href="/books/list/{{book.id}}"> {{ book.title }}</a>
+          </h4>
+          <div class="meta">
+            by <strong>{{ book.author }}</strong>
+          </div>
+          <div class="card-text">
+            Publisher: <strong>{{ book.publisher }}</strong>
+          </div>
+          <div class="card-text">
+            ISBN: <strong>{{ book.isbn }}</strong>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="float-right"
+            ><h3>${{ book.listPrice }}</h3></span
+          >
+          <span><i class=""></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<br />
+
+
+
+

@@ -1,0 +1,106 @@
+<h1 mat-dialog-title>DETAILS FOR ORDERS: {{order.id}}</h1>
+<hr />
+<div mat-dialog-content>
+  <div class="panel panel-default height">
+    <div class="panel-heading"><strong>Billing Details</strong></div>
+    <div class="panel-body">
+      <span>{{order.orderBillingAddress.billingAddressName}}</span>
+      <br />
+      <span>{{order.orderBillingAddress.billingAddressStreet}}</span>
+      <br />
+      <span>{{order.orderBillingAddress.billingAddressCity}}</span>
+      <br />
+      <span>{{order.orderBillingAddress.billingAddressState}}</span>
+      <br />
+      <span>{{order.orderBillingAddress.billingAddressCountry}}</span>
+      <br />
+      <span>{{order.orderBillingAddress.billingAddressZipcode}}</span>
+      <br />
+    </div>
+  </div>
+
+  <div class="panel panel-default height">
+    <div class="panel-heading"><strong>Payment Information</strong></div>
+    <div class="panel-body">
+      <span>{{order.orderPayment.cardName}}</span>
+      <br />
+      Visa
+      <br />
+      <span>{{order.orderPayment.cardNumber}}</span>
+      <br />
+      <span>Exp Date:</span> <span>{{order.orderPayment.expiryDate}}</span>
+      <br />
+    </div>
+  </div>
+
+  <div class="panel panel-default height">
+    <div class="panel-heading"><strong>Shipping Address</strong></div>
+    <div class="panel-body">
+      <span>{{order.orderShippingAddress.shippingAddressName}}</span>
+      <br />
+      <span>{{order.orderShippingAddress.shippingAddressStreet}}</span>
+      <br />
+      <span>{{order.orderShippingAddress.shippingAddressCity}}</span>
+      <br />
+      <span>{{order.orderShippingAddress.shippingAddressState}}</span>
+      <br />
+      <span>{{order.orderShippingAddress.shippingAddressCountry}}</span>
+      <br />
+      <span>{{order.orderShippingAddress.shippingAddressZipcode}}</span>
+      <br />
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="text-center"><strong>Order summary</strong></h3>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <td><strong>Item Name</strong></td>
+              <td class="text-center"><strong>Item Price</strong></td>
+              <td class="text-center"><strong>Item Quantity</strong></td>
+              <td class="text-right"><strong>Total</strong></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cartItem of order.cartItemList">
+              <td>{{cartItem.book.title}}</td>
+              <td class="text-center">{{cartItem.book.ourPrice}}</td>
+              <td class="text-center">
+                {{cartItem.qty}}
+              </td>
+              <td class="text-right">{{cartItem.subtotal}}</td>
+            </tr>
+            <tr>
+              <td class="highrow"></td>
+              <td class="highrow"></td>
+              <td class="highrow text-center">
+                <strong>Subtotal</strong>
+              </td>
+              <td class="highrow text-right">{{order.orderTotal}}</td>
+            </tr>
+            <tr>
+              <td class="emptyrow"></td>
+              <td class="emptyrow"></td>
+              <td class="emptyrow text-center"><strong>Tax</strong></td>
+              <td class="emptyrow text-right">{{order.orderTotal*0.06}}</td>
+            </tr>
+            <tr>
+              <td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
+              <td class="emptyrow"></td>
+              <td class="emptyrow text-center"><strong>Total</strong></td>
+              <td class="emptyrow text-right">{{order.orderTotal*1.06}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">OK</button>
+</div>

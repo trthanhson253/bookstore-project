@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Add My Category</h1>
+<hr />
+<div mat-dialog-content>
+  <h5>Category Name:</h5>
+  <input
+    type="text"
+    class="form-control"
+    id="name"
+    [(ngModel)]="newCates.name"
+    placeholder="Add A New Category"
+  />
+  <br />
+</div>
+<br />
+<br />
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+
+  <button mat-raised-button color="warn" (click)="onAddNewCates()">
+    Add New Category
+  </button>
+</div>

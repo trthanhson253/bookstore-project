@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+<div class="container-fluid-full">
+  <div class="row-fluid">
+    <app-menu></app-menu>
+    <div id="content" class="span10">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- end: Content -->
+  </div>
+  <!--/#content.span10-->
+</div>
+<!--/fluid-row-->
+
+<div class="clearfix"></div>
+
+<footer>
+  <p>
+    <span style="text-align:left;float:left"
+      >Connected as <strong>{{ currentUser.name }}</strong></span
+    >
+  </p>
+</footer>

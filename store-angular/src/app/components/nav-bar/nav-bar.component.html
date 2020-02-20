@@ -1,0 +1,354 @@
+<div class="bea-portal-body-content" id="bea-portal-body-content">
+  <div class="bea-portal-body-header">
+    <div class="bea-portal-book-primary">
+      <div id="alibris-header-red">
+        <div class="offer-bar">
+          <h2>
+            Welcome to BookStore Demo Page
+          </h2>
+
+          <div class="other-sites">
+            <ul>
+              <li>
+                <a href="javascript:;" (click)="openNoticeHowToUse()"
+                  ><span class="glyphicon glyphicon-star-empty"></span>&nbsp;HOW
+                  TO USE THE SITE
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://bookstore-demo-admin.herokuapp.com/"
+                  target="_blank"
+                  ><span class="glyphicon glyphicon-user"></span>&nbsp;Go to
+                  Admin Page</a
+                >
+              </li>
+              <li>
+                <a href="https://github.com/trthanhson253" target="_blank"
+                  ><img src="../../../assets/img/github.png" />&nbsp;My
+                  Github</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar yamm">
+          <div id="navbar-collapse-grid" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="alibris-logo">
+                <a class="navbar-brand" [routerLink]="['/home']"
+                  ><img
+                    src="../../../assets/img/logo.png"
+                    alt="logo"
+                    style="margin-top: -50px;"
+                /></a>
+              </li>
+
+              <li class="dropdown yamm-fw">
+                <a
+                  href="javascript:;"
+                  class="dropdown-toggle nav-top"
+                  style="text-decoration: none;"
+                  ><img src="../../../assets/img/list.png" /> &nbsp;Categories
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="grid-subnav">
+                    <div class="row">
+                      <div class="subnav-container">
+                        <ul class="trigger-menu" role="menu">
+                          <li
+                            class="trigger-item maintainHover"
+                            data-submenu-id="books-subjects"
+                          >
+                            Books List By Subjects
+                            <span class="menu-chevron">&gt;</span>
+                            <div
+                              id="books-subjects"
+                              class="popover"
+                              style="display: block; top: 0px; left: 220px;"
+                              data-original-title=""
+                              title=""
+                            >
+                              <div
+                                *ngIf="!dataFetched"
+                                style="margin-top: 50px;"
+                              >
+                                <div class="row">
+                                  <div class="col-md-2 col-md-offset-5">
+                                    <mat-spinner></mat-spinner>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="sub-panel-content"
+                                *ngIf="dataFetched"
+                              >
+                                <div class="row">
+                                  <div class="col-sm-2">
+                                    <ul
+                                      class="submenu-inner first clearfix"
+                                      *ngFor="let cate of cates"
+                                    >
+                                      <li>
+                                        <a
+                                          [routerLink]="['cates/list', cate.id]"
+                                          >{{ cate.name }}</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown yamm-fw">
+                <a
+                  [routerLink]="['books/all']"
+                  class="dropdown-toggle nav-top"
+                  style="text-decoration: none;"
+                  ><div style="font-family: Arial, Helvetica, sans-serif;">
+                    <span class="glyphicon glyphicon-book"></span>&nbsp;<strong
+                      >All Books</strong
+                    >
+                  </div>
+                </a>
+              </li>
+            </ul>
+
+            <div class="login-nav">
+              <ul class="nav navbar-nav">
+                <li class="dropdown" *ngIf="!isLoggedIn">
+                  <a [routerLink]="['/login']" class="dropdown-toggle sign-in">
+                    <div class="name" title="son">
+                      <a [routerLink]="['/login']">
+                        <strong>Sign In</strong>
+                      </a>
+                    </div>
+                  </a>
+                </li>
+                <li class="dropdown" *ngIf="isLoggedIn">
+                  <a
+                    [routerLink]="['/wishlist-cart']"
+                    class="dropdown-toggle sign-in"
+                  >
+                    <div class="name" title="son"><span class="glyphicon glyphicon-star"></span>&nbsp;
+                      Favorite List
+                    </div>
+                    <b class="caret"></b>
+                  </a>
+
+                  <ul
+                    class="dropdown-menu dropdown-menu-right account "
+                    style="display: none;width: 350px;"
+                  >
+                    <li>
+                      <div class="yamm-content">
+                        <div class="form-group">
+                          <div
+                            class="row"
+                            style="font-family:Arial, Helvetica, sans-serif"
+                            *ngFor="
+                              let wishListCartItem of wishListCartItemList
+                            "
+                          >
+                            <div class="col-lg-12" style="height: 100%;">
+                              <div class="col-lg-4">
+                                <a
+                                  [routerLink]="[
+                                    '/books/list',
+                                    wishListCartItem.book.id
+                                  ]"
+                                >
+                                  <img
+                                    class="card-img-top"
+                                    style="width: 60px;height: 60px;"
+                                    [src]="
+                                      'http://localhost:8184/image/book/' +
+                                      wishListCartItem.book.id +
+                                      '.png'
+                                    "
+                                    (error)="
+                                      img.src =
+                                        '../../../assets/img/default.png'
+                                    "
+                                    #img
+                                  />
+                                </a>
+                              </div>
+                              <div class="col-lg-6">
+                                <a
+                                  [routerLink]="[
+                                    '/books/list',
+                                    wishListCartItem.book.id
+                                  ]"
+                                  ><strong>{{
+                                    wishListCartItem.book.title
+                                  }}</strong></a
+                                >
+                                <p>by {{ wishListCartItem.book.author }}</p>
+                              </div>
+                              <a
+                                href="javascript:;"
+                                class="col-lg-2"
+                                (click)="
+                                  removeWishListCartItem(wishListCartItem.id)
+                                "
+                                >Remove</a
+                              >
+                              <br />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="dropdown" *ngIf="isLoggedIn">
+                  <a
+                    [routerLink]="['/my-account/home']"
+                    class="dropdown-toggle sign-in"
+                  >
+                    <div class="name" title="son">
+                      <img
+                        [src]="
+                          'http://localhost:8184/image/user/' +
+                          currentUser.id +
+                          '.png'
+                        "
+                        (error)="img.src = '../../../assets/img/default.png'"
+                        #img
+                        border="0"
+                        style="height: 15px;width:20px"
+                      />
+                    </div>
+                    <b class="caret"></b>
+                  </a>
+
+                  <ul
+                    class="dropdown-menu dropdown-menu-right account "
+                    style="display: none;"
+                  >
+                    <li>
+                      <div class="yamm-content">
+                        <div class="form-group">
+                          <p style="font-family:Arial, Helvetica, sans-serif">
+                            Signed in as <strong>{{ name }}</strong>
+                          </p>
+                          <!-- <p style="font-family:Arial, Helvetica, sans-serif">
+                            <strong>.... {{ currentUser.email | slice:8 }}</strong>
+                          </p> -->
+                          <hr />
+
+                          <a [routerLink]="['/my-account/home']">My Account</a>
+
+                          <a [routerLink]="['/my-account/shipping']"
+                            >My Address</a
+                          >
+                          <a [routerLink]="['/my-account/payment']">My Card</a>
+                          <a [routerLink]="['/my-account/order']">My Order</a>
+                          <a [routerLink]="['/wishlist-cart']"
+                            >My Favorite Book</a
+                          >
+
+                          <hr />
+                        </div>
+
+                        <div class="form-group">
+                          <a (click)="onLogout()" class="btn btn-lg btn-main"
+                            >Sign Out</a
+                          >
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="cart-nav">
+                  <a
+                    [routerLink]="['/shopping-cart']"
+                    class="dropdown-toggle cart"
+                    ><img
+                      src="../../../assets/img/cart.png"
+                      border="0"
+                      alt="View Cart"
+                    />
+                    (<span id="cart-items-text">{{ cartItemNumber }}</span
+                    >)</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="search-container">
+          <form (ngSubmit)="onSearch()">
+            <div class="search-nav">
+              <label for="searchBox" class="visuallyhidden"
+                >Search Your Book Here</label
+              >
+              <span
+                ><input
+                  type="text"
+                  id="keyword"
+                  name="keyword"
+                  class="form-control search-input ui-autocomplete-input"
+                  placeholder="Search Your Book Here"
+                  autocomplete="off"
+                  [(ngModel)]="keyword"
+                  list="browsers2"
+                  (ngModelChange)="ketqua($event)"
+                />
+                <datalist id="browsers2">
+                  <option *ngFor="let sach of sachs">
+                    <strong>{{ sach.title }}</strong>
+                  </option>
+                </datalist></span
+              >
+            </div>
+            <div class="selection">
+              <div class="select-style">
+                <label for="mtypeMenu" class="visuallyhidden"
+                  >Select Book Format Menu</label
+                >
+                <select
+                  class="selectpicker"
+                  name="searchOption"
+                  id="searchOption"
+                  [(ngModel)]="searchOption"
+                  aria-label="formats"
+                >
+                  <option data-icon="icon-heart">Search All</option>
+                  <option data-icon="icon-heart">Search by Title</option>
+                  <option data-icon="icon-heart">Search by Author</option>
+                  <option data-icon="icon-heart">Search by Publisher</option>
+                  <option data-icon="icon-heart">Search by ISBN</option>
+                </select>
+              </div>
+            </div>
+            <input
+              name="hs"
+              id="sbSubmit"
+              type="image"
+              value="Submit"
+              src="../../../assets/img/mag-glass.gif"
+              alt="search go button"
+              (click)="onSearch()"
+            />
+          </form>
+        </div>
+      </div>
+      <hr
+        style=" height: 12px;
+border: 0;
+box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);"
+      />
+    </div>
+  </div>
+</div>
